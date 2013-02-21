@@ -8,7 +8,7 @@ namespace KOODEV_NAMESPACE {
 #endif // KOODEV_NAMESPACE
 
 KoodevStopwatch::KoodevStopwatch(const char *msg/*=NULL*/, bool autostart/*=true*/, bool dumpOnDestroy/*=true*/, bool nanos/*=false*/)
-	: m_started(false)
+    : m_started(false)
     , m_measureNanos(nanos)
 	, m_dumpOnDestroy(dumpOnDestroy)
 {
