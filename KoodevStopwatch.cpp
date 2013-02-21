@@ -9,8 +9,8 @@ namespace KOODEV_NAMESPACE {
 
 KoodevStopwatch::KoodevStopwatch(const char *msg/*=NULL*/, bool autostart/*=true*/, bool dumpOnDestroy/*=true*/, bool nanos/*=false*/)
 	: m_started(false)
-	, m_dumpOnDestroy(dumpOnDestroy)
     , m_measureNanos(nanos)
+	, m_dumpOnDestroy(dumpOnDestroy)
 {
     initDefaultMessage();
     setMessage(msg);
@@ -81,7 +81,7 @@ void KoodevStopwatch::setMessage(const char *msg)
 void KoodevStopwatch::dump()
 {
     long prevTime = 0;
-    for (int i = 0; i < m_labTimeRecords.size(); i++) {
+    for (unsigned int i = 0; i < m_labTimeRecords.size(); i++) {
         long currentTime = getTime(m_labTimeRecords[i].labTimeval);
         dumpMessage(currentTime - prevTime, m_labTimeRecords[i].tag.data());
         prevTime = currentTime;

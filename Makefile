@@ -3,7 +3,7 @@ CXX=g++
 LDFLAGS=-L.
 LIBS=
 CFLAGS=$(INC)
-CXXFLAGS=$(INC) #-Wall
+CXXFLAGS=$(INC) -Wall
 
 SRCS=TestMain.cpp KoodevStopwatch.cpp
 OBJS=$(SRCS:.cpp=.o)
