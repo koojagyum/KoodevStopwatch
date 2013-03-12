@@ -55,7 +55,11 @@ void KoodevStopwatch::reset()
 void KoodevStopwatch::lab()
 {
     char buffer[8] = {0, };
+#ifdef KOODEV_ENV_64
     sprintf(buffer, "lab#%ld", m_labTimeRecords.size()+1);
+#else
+    sprintf(buffer, "lab#%u", m_labTimeRecords.size()+1);
+#endif // KOODEV_ARCH_32
     lab(buffer);
 }
 

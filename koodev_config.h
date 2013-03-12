@@ -11,6 +11,25 @@
  */
 // #define KOODEV_NAMESPACE WebKit
 
+// Check windows
+#if _WIN32 || _WIN64
+#if _WIN64
+#define KOODEV_ENV_64
+#else
+#define KOODEV_ENV_32
+#endif // _WIN64
+#endif // _WIN64 || _WIN32
+
+// Check GCC
+// FIXME: Add other architectures(ex: MIPS, IA, ...)
+#if __GNUC__
+#if __x86_64__ || __ppc64__
+#define KOODEV_ENV_64
+#else
+#define KOODEV_ENV_32
+#endif // __x86_64__ || __ppc64__
+#endif // __GNUC__
+
 #ifdef KOODEV_PLATFORM_ANDROID
 #include <android/log.h>
 #define KOODEV_LOGTAG "koodev"
