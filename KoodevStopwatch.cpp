@@ -59,7 +59,7 @@ void KoodevStopwatch::lab()
     sprintf(buffer, "lab#%ld", m_labTimeRecords.size()+1);
 #else
     sprintf(buffer, "lab#%u", m_labTimeRecords.size()+1);
-#endif // KOODEV_ARCH_32
+#endif // KOODEV_ARCH_64
     lab(buffer);
 }
 
