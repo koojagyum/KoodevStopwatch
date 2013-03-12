@@ -13,9 +13,9 @@
 
 #ifdef KOODEV_PLATFORM_ANDROID
 #include <android/log.h>
-#define KOODEV_PRINT(args...)  __android_log_print(ANDROID_LOG_INFO, "koodev" , ## args)
+#define KOODEV_LOGTAG "koodev"
+#define KOODEV_PRINT(args...)  __android_log_print(ANDROID_LOG_INFO, KOODEV_LOGTAG , ## args)
 #else
-/* #define KOODEV_PRINT(args...) printf(##, args); */
 #define KOODEV_PRINT(fmt, ...) printf(fmt, __VA_ARGS__)
 #endif // KOODEV_PLATFORM_ANDROID
 
