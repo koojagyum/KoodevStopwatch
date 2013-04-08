@@ -17,7 +17,7 @@ namespace KOODEV_NAMESPACE {
 class KoodevStopwatch
 {
 public:
-    KoodevStopwatch(const char *msg=NULL, bool autostart=true, bool dumpOnDestroy=true, bool nanos=false);
+    KoodevStopwatch(const char *msg=NULL, bool igonreZeroDump=false, bool autostart=true, bool dumpOnDestroy=true, bool nanos=false);
     ~KoodevStopwatch();
 
     void start();
@@ -25,6 +25,7 @@ public:
     void reset();
     void lab();
     void lab(const char *tag);
+    void setIgonreZeroDump(bool ignoreZeroDump);
 
     void setMessage(const char *msg);
     void dump();
@@ -49,6 +50,7 @@ private:
     std::string m_message;
 
     bool m_dumpOnDestroy;
+    bool m_ignoreZeroDump;
 
     void initDefaultMessage();
     long getTime(timeval &labTimeval);

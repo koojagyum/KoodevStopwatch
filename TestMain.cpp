@@ -14,6 +14,7 @@ void bar()
     KoodevStopwatch w("bar");
     for (int i=0; i<10000; i++) {
         KoodevStopwatch w;
+        w.setIgonreZeroDump(true);
     }
 }
 

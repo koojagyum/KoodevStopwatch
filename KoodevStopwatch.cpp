@@ -7,10 +7,11 @@ using namespace std;
 namespace KOODEV_NAMESPACE {
 #endif // KOODEV_NAMESPACE
 
-KoodevStopwatch::KoodevStopwatch(const char *msg/*=NULL*/, bool autostart/*=true*/, bool dumpOnDestroy/*=true*/, bool nanos/*=false*/)
+    KoodevStopwatch::KoodevStopwatch(const char *msg/*=NULL*/, bool igonreZeroDump/*=false*/, bool autostart/*=true*/, bool dumpOnDestroy/*=true*/, bool nanos/*=false*/)
     : m_started(false)
     , m_measureNanos(nanos)
 	, m_dumpOnDestroy(dumpOnDestroy)
+    , m_ignoreZeroDump(false)
 {
     initDefaultMessage();
     setMessage(msg);
@@ -74,6 +75,11 @@ void KoodevStopwatch::lab(const char *tag)
     m_labTimeRecords.push_back(ltd);
 }
 
+void KoodevStopwatch::setIgonreZeroDump(bool ignoreZeroDump)
+{
+    m_ignoreZeroDump = ignoreZeroDump;
+}
+
 void KoodevStopwatch::setMessage(const char *msg)
 {
     if (msg == NULL)
@@ -86,12 +92,17 @@ void KoodevStopwatch::dump()
 {
     long prevTime = 0;
     for (unsigned int i = 0; i < m_labTimeRecords.size(); i++) {
-        long currentTime = getTime(m_labTimeRecords[i].labTimeval);
-        dumpMessage(currentTime - prevTime, m_labTimeRecords[i].tag.data());
+        const long currentTime = getTime(m_labTimeRecords[i].labTimeval);
+        const long labTime = currentTime - prevTime;
         prevTime = currentTime;
+        if (labTime > 0 || !m_ignoreZeroDump)
+            dumpMessage(labTime, m_labTimeRecords[i].tag.data());
     }
-    if (!m_started)
-        dumpMessage(getTime());
+    if (!m_started) {
+        const long labTime = getTime();
+        if (labTime > 0 || !m_ignoreZeroDump)
+            dumpMessage(labTime);
+    }
 }
 
 long KoodevStopwatch::getTime()
