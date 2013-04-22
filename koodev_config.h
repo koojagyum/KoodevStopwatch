@@ -11,14 +11,15 @@
  */
 // #define KOODEV_NAMESPACE WebKit
 
-// Check windows
-#if _WIN32 || _WIN64
-#if _WIN64
-#define KOODEV_ENV_64
-#else
-#define KOODEV_ENV_32
-#endif // _WIN64
-#endif // _WIN64 || _WIN32
+// FIXME: Windows build currently not supported.
+/* // Check windows */
+/* #if _WIN32 || _WIN64 */
+/* #if _WIN64 */
+/* #define KOODEV_ENV_64 */
+/* #else */
+/* #define KOODEV_ENV_32 */
+/* #endif // _WIN64 */
+/* #endif // _WIN64 || _WIN32 */
 
 // Check GCC
 // FIXME: Add other architectures(ex: MIPS, IA, ...)
