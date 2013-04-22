@@ -1,25 +1,16 @@
-CXX=g++
+DIRS=src tests
 
-LDFLAGS=-L.
-LIBS=
-CFLAGS=$(INC)
-CXXFLAGS=$(INC) -Wall
+TOPDIR:=$(shell pwd)
+export BINDIR=$(TOPDIR)/bin
+export SRCDIR=$(TOPDIR)/src
 
-SRCS=TestMain.cpp KoodevStopwatch.cpp
-OBJS=$(SRCS:.cpp=.o)
-
-TARGET=test
-
-all: $(TARGET)
-
-$(TARGET): $(OBJS)
-	$(CXX) -o $@ $(OBJS) $(LIBS)
-
-.cpp.o:
-	$(CXX) -c $(CXXFLAGS) $< -o $@
-
-.c.o:
-	$(CXX) -c $(CXXFLAGS) $< -o $@
+all:
+	@for dir in $(DIRS); do \
+	make -C $$dir || exit $?; \
+	done
 
 clean:
-	rm -Rf $(OBJS) $(TARGET) core
+	@for dir in $(DIRS); do \
+	make -C $$dir clean; \
+	done
+	rm -rf $(BINDIR)
