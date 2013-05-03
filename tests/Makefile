@@ -28,7 +28,8 @@ $(TARGET): $(OBJS) $(TEST-RUNNER)
 
 $(TEST-RUNNER):
 	mkdir -p $(BINDIR)
-	@echo "#!/bin/sh\nLD_LIBRARY_PATH=$(BINDIR) $(BINDIR)/$(TARGET)" > $(TEST-RUNNER)
+	@echo "#!/bin/sh" > $(TEST-RUNNER)
+	@echo "LD_LIBRARY_PATH=$(BINDIR) $(BINDIR)/$(TARGET)" >> $(TEST-RUNNER)
 	chmod +x $(TEST-RUNNER)
 
 clean:
