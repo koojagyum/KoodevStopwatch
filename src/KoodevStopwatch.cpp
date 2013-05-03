@@ -7,11 +7,11 @@ using namespace std;
 namespace KOODEV_NAMESPACE {
 #endif // KOODEV_NAMESPACE
 
-KoodevStopwatch::KoodevStopwatch(const char *msg/*=NULL*/, bool igonreZeroDump/*=false*/, bool autostart/*=true*/, bool dumpOnDestroy/*=true*/, bool nanos/*=false*/)
+KoodevStopwatch::KoodevStopwatch(const char *msg/*=NULL*/, bool ignoreZeroDump/*=false*/, bool autostart/*=true*/, bool dumpOnDestroy/*=true*/, bool nanos/*=false*/)
     : m_started(false)
     , m_measureNanos(nanos)
 	, m_dumpOnDestroy(dumpOnDestroy)
-    , m_ignoreZeroDump(false)
+    , m_ignoreZeroDump(ignoreZeroDump)
 {
     initDefaultMessage();
     setMessage(msg);
