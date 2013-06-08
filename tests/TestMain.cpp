@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include "KoodevStopwatch.h"
 
-#include <unistd.h>
+#include <windows.h>
 
 void foo()
 {
     KoodevStopwatch w("foo");
-    sleep(2);
+    Sleep(2000);
 }
 
 void bar()

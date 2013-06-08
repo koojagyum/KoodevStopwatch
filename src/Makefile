@@ -1,8 +1,5 @@
-VERSION_MAJOR=0
-VERSION_MINOR=0
-VERSION_MICRO=0
-VERSION_SONUM=$(VERSION_MAJOR)
-VERSION=$(VERSION_MAJOR).$(VERSION_MINOR).$(VERSION_MICRO)
+TOPDIR=..
+BINDIR=$(TOPDIR)\$(BINDIR_NAME)
 
 CXX=g++
 
@@ -16,16 +13,10 @@ SRCS=\
 
 OBJS=$(SRCS:.cpp=.o)
 
-TARGET=libKoodevStopwatch.so
+TARGET=libKoodevStopwatch.dll
 
-$(TARGET): $(OBJS)
-	$(CXX) -shared -Wl,-soname,$@.$(VERSION_SONUM) -o $@.$(VERSION) $(OBJS) $(LIBS)
-	ln -s $@.$(VERSION) $@.$(VERSION_SONUM)
-	ln -s $@.$(VERSION_SONUM) $@
-	mkdir -p $(BINDIR)
-	mv $@.$(VERSION) $(BINDIR)
-	mv $@.$(VERSION_SONUM) $(BINDIR)
-	mv $@ $(BINDIR)
+$(TARGET): $(OBJS) $(BINDIR)
+	$(CXX) -shared -Wl,-soname,$@ -o $(BINDIR)\$@ $(OBJS) $(LIBS)
 
 .cpp.o:
 	$(CXX) -c $(CXXFLAGS) $< -o $@
@@ -33,5 +24,8 @@ $(TARGET): $(OBJS)
 .c.o:
 	$(CXX) -c $(CXXFLAGS) $< -o $@
 
+$(BINDIR):
+	mkdir $(BINDIR)
+
 clean:
-	rm -rf $(OBJS) $(TARGET) $(TARGET).* core
+	$(RM) $(OBJS) $(TARGET) $(TARGET).* core

@@ -1,3 +1,7 @@
+TOPDIR=..
+BINDIR=$(TOPDIR)\$(BINDIR_NAME)
+SRCDIR=$(TOPDIR)\$(SRCDIR_NAME)
+
 INCLUDE=$(SRCDIR)
 
 CXX=g++
@@ -11,14 +15,12 @@ SRCS=\
 	TestMain.cpp
 
 OBJS=$(SRCS:.cpp=.o)
-TEST-RUNNER=$(BINDIR)/test-runner.sh
+TEST-RUNNER=$(BINDIR)\test-runner.bat
 
 TARGET=test
 
-$(TARGET): $(OBJS) $(TEST-RUNNER)
-	$(CXX) -o $@ $(OBJS) $(LIBS)
-	mkdir -p $(BINDIR)
-	mv $(TARGET) $(BINDIR)
+$(TARGET): $(OBJS) $(BINDIR)
+	$(CXX) -o $(BINDIR)\$@ $(OBJS) $(LIBS)
 
 .cpp.o:
 	$(CXX) -c $(CXXFLAGS) $< -o $@
@@ -26,11 +28,8 @@ $(TARGET): $(OBJS) $(TEST-RUNNER)
 .c.o:
 	$(CXX) -c $(CXXFLAGS) $< -o $@
 
-$(TEST-RUNNER):
-	mkdir -p $(BINDIR)
-	@echo "#!/bin/sh" > $(TEST-RUNNER)
-	@echo "LD_LIBRARY_PATH=$(BINDIR) $(BINDIR)/$(TARGET)" >> $(TEST-RUNNER)
-	chmod +x $(TEST-RUNNER)
+$(BINDIR):
+	mkdir $(BINDIR)
 
 clean:
-	rm -rf $(OBJS) $(TARGET) $(TARGET).* core
+	$(RM) $(OBJS) $(TARGET) $(TARGET).* core

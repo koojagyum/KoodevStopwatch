@@ -1,16 +1,20 @@
 DIRS=src tests
 
-TOPDIR:=$(shell pwd)
-export BINDIR=$(TOPDIR)/bin
-export SRCDIR=$(TOPDIR)/src
+export BINDIR_NAME=bin
+export SRCDIR_NAME=src
+
+BINDIR=$(BINDIR_NAME)
+
+export MAKE=mingw32-make.exe
+export RM=del /q
+export RMDIR=rmdir /s /q
+export MOVE=move
 
 all:
-	@for dir in $(DIRS); do \
-	make -C $$dir || exit $?; \
-	done
+	@for %%d in ($(DIRS)) do \
+	$(MAKE) -C %%d || exit $?
 
 clean:
-	@for dir in $(DIRS); do \
-	make -C $$dir clean; \
-	done
-	rm -rf $(BINDIR)
+	@for %%d in ($(DIRS)) do \
+	$(MAKE) -C %%d clean
+	$(RMDIR) $(BINDIR)
