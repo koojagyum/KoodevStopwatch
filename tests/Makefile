@@ -15,7 +15,6 @@ SRCS=\
 	TestMain.cpp
 
 OBJS=$(SRCS:.cpp=.o)
-TEST-RUNNER=$(BINDIR)\test-runner.bat
 
 TARGET=test
 
