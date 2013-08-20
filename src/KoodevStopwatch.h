@@ -26,6 +26,7 @@ public:
     void lab();
     void lab(const char *tag);
     void setIgonreZeroDump(bool ignoreZeroDump);
+    void setDumpOnDestroy(bool dumpOnDestroy);
 
     void setMessage(const char *msg);
     void dump();

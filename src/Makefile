@@ -12,7 +12,8 @@ CFLAGS=$(INC) -W -Wall -fPIC
 CXXFLAGS=$(INC) -W -Wall -fPIC
 
 SRCS=\
-	KoodevStopwatch.cpp
+	KoodevStopwatch.cpp \
+	koodev-sw-interface.cpp
 
 OBJS=$(SRCS:.cpp=.o)
 

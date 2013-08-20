@@ -80,6 +80,11 @@ void KoodevStopwatch::setIgonreZeroDump(bool ignoreZeroDump)
     m_ignoreZeroDump = ignoreZeroDump;
 }
 
+void KoodevStopwatch::setDumpOnDestroy(bool dumpOnDestroy)
+{
+    m_dumpOnDestroy = dumpOnDestroy;
+}
+
 void KoodevStopwatch::setMessage(const char *msg)
 {
     if (msg == NULL)
